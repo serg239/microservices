@@ -5,6 +5,19 @@ FROM ubuntu:16.04
 
 RUN apt-get update
 RUN apt-get install -y mongodb-server ruby-full ruby-dev build-essential git
+RUN gem install rubygems-update
+
+RUN gem environment
+RUN update_rubygems
+# RUN gem sources --list
+RUN gem update --system
+# RUN gem outdated
+
+RUN gem install bcrypt -v '3.1.11' --source 'https://rubygems.org/'
+RUN gem install bson -v '4.2.2' --source 'https://rubygems.org/'
+RUN gem install bson_ext -v '1.5.1' --source 'https://rubygems.org/'
+RUN gem install puma -v '3.10.0' --source 'https://rubygems.org/'
+
 RUN gem install bundler
 
 # Upload the application to container
